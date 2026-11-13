@@ -1,26 +1,44 @@
-import { Grid } from "./componentes/grid";
-import { Flex } from "./componentes/flex";
+import { useState, useEffect } from 'react'
+import Boton from './Boton'
+import { Form } from './assets/Forms'
 
 function App() {
+  const [oscuro, setOscuro] = useState(false)
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', oscuro)
+  }, [oscuro])
+
   return (
-    <>
-      <h1 className="bg-blue-600 text-white py-4 my-5 text-center text-3xl font-bold">
-        Mi aplicacion con Tailwind!
-      </h1>
+    <div className="min-h-screen bg-white text-black dark:bg-gray-900 dark:text-white transition-colors">
+      <div className="flex justify-end p-4">
+        <Boton variante="secundario" onClick={() => setOscuro(!oscuro)}>
+          {oscuro ? 'Modo claro' : ' Modo oscuro'}
+        </Boton>
+      </div>
 
-      <main className="max-w-5xl mx-auto px-4 space-y-10">
-        <section>
-          <h2 className="text-xl font-semibold mb-3 text-center">Grid</h2>
-          <Grid />
-        </section>
+      <h1 className="text-3xl font-bold text-center">React tailwind</h1>
+      <Form />
 
-        <section>
-          <h2 className="text-xl font-semibold mb-3 text-center">Flex</h2>
-          <Flex />
-        </section>
-      </main>
-    </>
-  );
+      <div className="p-6 flex gap-4 justify-center">
+        <Boton variante="primario" onClick={() => alert('Guardado correctamente')}>
+          Guardar Cambios
+        </Boton>
+        <Boton variante="secundario" onClick={() => alert('Operación cancelada')}>
+          Cancelar
+        </Boton>
+        <Boton variante="peligro" onClick={() => alert('Registro eliminado')}>
+          Eliminar Usuario
+        </Boton>
+        <Boton variante="exito" onClick={() => alert('Aprobado')}>
+          Aprobar
+        </Boton>
+        <Boton disabled>
+          Deshabilitado
+        </Boton>
+      </div>
+    </div>
+  )
 }
 
-export default App;
+export default App

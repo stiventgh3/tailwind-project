@@ -1,1 +1,9 @@
-@import "tailwindcss"
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer components {
+  .mi-boton-global {
+    @apply px-4 py-2 rounded-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 shadow-md transition-all cursor-pointer;
+  }
+}
